@@ -1,4 +1,4 @@
-import 'package:followmedicine/drinkDates.dart';
+import 'package:followmedicine/models/drinkDates.dart';
 import 'package:hive/hive.dart';
 part 'medicine.g.dart';
 

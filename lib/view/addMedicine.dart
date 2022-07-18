@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:followmedicine/colors.dart';
+import 'package:followmedicine/helper/colors.dart';
 import 'package:flutter/services.dart';
-import 'package:followmedicine/medicine.dart';
+import 'package:followmedicine/models/medicine.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:followmedicine/colors.dart';
-import 'package:followmedicine/dateList.dart';
-import 'package:followmedicine/size.dart';
+import 'package:followmedicine/helper/colors.dart';
+import 'package:followmedicine/helper/dateList.dart';
+import 'package:followmedicine/helper/size.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 
 class TabBarWidget extends StatefulWidget {
   TabBarWidget({Key? key}) : super(key: key);
@@ -11,11 +12,15 @@ class TabBarWidget extends StatefulWidget {
   State<TabBarWidget> createState() => _TabBarWidgetState();
 }
 
+late int selectedIndex;
+
 class _TabBarWidgetState extends State<TabBarWidget>
     with TickerProviderStateMixin {
   late TabController _tabController;
   late int weekday = DateTime(2022, DateTime.now().month).weekday;
-  late int selectedIndex;
+
+  get selectedTabBar => _tabController.index;
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +38,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
         TabBar(
           isScrollable: true,
           labelColor: Colors.black,
-          labelStyle:  GoogleFonts.montserrat(
+          labelStyle: GoogleFonts.montserrat(
             fontSize: 32,
             fontWeight: FontWeight.bold,
           ),
@@ -88,8 +93,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                     // Text(weekday.toString()),
                     Expanded(
                       child: GridView.count(
-                                        physics: NeverScrollableScrollPhysics(),
-
+                        physics: NeverScrollableScrollPhysics(),
                         padding: const EdgeInsets.only(top: 10),
                         crossAxisCount: 7,
                         crossAxisSpacing: 4.0,
@@ -100,7 +104,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                               ? GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      debugPrint((index-weekday).toString());
+                                      debugPrint((index - weekday).toString());
                                       selectedIndex = index;
                                     });
                                   },
@@ -129,7 +133,6 @@ class _TabBarWidgetState extends State<TabBarWidget>
                 );
               })),
         ),
-        
       ],
     );
   }

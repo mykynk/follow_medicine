@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:followmedicine/colors.dart';
-import 'package:followmedicine/medicine.dart';
-import 'package:followmedicine/myMedicine.dart';
-import 'package:followmedicine/mykDateTimePicker.dart';
+import 'package:followmedicine/helper/colors.dart';
+import 'package:followmedicine/models/medicine.dart';
+import 'package:followmedicine/view/myMedicine.dart';
+import 'package:followmedicine/view/Home/mykDateTimePicker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -13,6 +13,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(MedicineAdapter());
   Hive.openBox('medicines');
+
   runApp(const MedicineApp());
 }
 

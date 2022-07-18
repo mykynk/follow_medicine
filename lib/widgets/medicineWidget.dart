@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:followmedicine/colors.dart';
-import 'package:followmedicine/size.dart';
+import 'package:followmedicine/helper/colors.dart';
+import 'package:followmedicine/helper/size.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MedicineWidget extends StatefulWidget {
@@ -38,9 +38,10 @@ class _MedicineWidgetState extends State<MedicineWidget> {
             ],
             stops: [
               0,
-              widget.count /
-                  widget.completedCount, //* 2 sayısı değişken olacak.
-              widget.count / widget.completedCount
+
+              widget.completedCount /
+                  widget.count, //* 2 sayısı değişken olacak.
+              widget.completedCount / widget.count
             ]),
       ),
       child: Row(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:followmedicine/addMedicine.dart';
-import 'package:followmedicine/colors.dart';
-import 'package:followmedicine/medicine.dart';
-import 'package:followmedicine/medicineWidget.dart';
+import 'package:followmedicine/models/medicine.dart';
+import 'package:followmedicine/view/addMedicine.dart';
+import 'package:followmedicine/helper/colors.dart';
+import 'package:followmedicine/widgets/medicineWidget.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -16,13 +16,14 @@ class MyMedicine extends StatefulWidget {
 class _MyMedicineState extends State<MyMedicine> {
   @override
   initState() {
- 
-
+    Hive.openBox('medicines');
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Center(
         child: ValueListenableBuilder(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:followmedicine/colors.dart';
-import 'package:followmedicine/dateList.dart';
-import 'package:followmedicine/medicineList.dart';
-import 'package:followmedicine/size.dart';
-import 'package:followmedicine/tabBar.dart';
+import 'package:followmedicine/helper/colors.dart';
+import 'package:followmedicine/helper/dateList.dart';
+import 'package:followmedicine/view/Home/medicineList.dart';
+import 'package:followmedicine/helper/size.dart';
+import 'package:followmedicine/view/Home/tabBar.dart';
 
 class MykDateTimePicker extends StatefulWidget {
   const MykDateTimePicker({Key? key}) : super(key: key);
@@ -13,11 +13,11 @@ class MykDateTimePicker extends StatefulWidget {
 }
 
 class _MykDateTimePickerState extends State<MykDateTimePicker> {
+  String selectedDate = DateTime.now().toString();
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(color: Colors.white),
-
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: Column(
@@ -36,7 +36,9 @@ class _MykDateTimePickerState extends State<MykDateTimePicker> {
             //     DateTime.now().month + 1,
             //   ).subtract(Duration(days: 1)).toString(),
             // ),
-            MedicineList()
+            MedicineList(
+              date: selectedDate,
+            )
           ],
         ),
       ),
