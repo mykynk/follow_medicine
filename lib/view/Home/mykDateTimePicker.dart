@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:followmedicine/helper/colors.dart';
 import 'package:followmedicine/helper/dateList.dart';
+import 'package:followmedicine/view/Home/hiveProvider.dart';
 import 'package:followmedicine/view/Home/medicineList.dart';
 import 'package:followmedicine/helper/size.dart';
-import 'package:followmedicine/view/Home/tabBar.dart';
+import 'package:followmedicine/view/Home/monthBar.dart';
+import 'package:provider/provider.dart';
 
 class MykDateTimePicker extends StatefulWidget {
   const MykDateTimePicker({Key? key}) : super(key: key);
@@ -22,22 +24,12 @@ class _MykDateTimePickerState extends State<MykDateTimePicker> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            TabBarWidget(),
-            // Text(
-            //   days[DateTime(2022, 7).weekday + 1],
-            // ),
-            // Text(
-            //   DateTime.utc(DateTime.now().year, DateTime.now().month, 1)
-            //       .toString(),
-            // ),
-            // Text(
-            //   DateTime.utc(
-            //     DateTime.now().year,
-            //     DateTime.now().month + 1,
-            //   ).subtract(Duration(days: 1)).toString(),
-            // ),
-            MedicineList(
-              date: selectedDate,
+            MonthBar(),
+            ChangeNotifierProvider(
+              create: (context) => HiveProvider(),
+              child: MedicineList(
+                date: selectedDate,
+              ),
             )
           ],
         ),

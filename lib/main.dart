@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:followmedicine/helper/boxNames.dart';
 import 'package:followmedicine/helper/colors.dart';
+import 'package:followmedicine/models/drinkDates.dart';
 import 'package:followmedicine/models/medicine.dart';
 import 'package:followmedicine/view/myMedicine.dart';
 import 'package:followmedicine/view/Home/mykDateTimePicker.dart';
@@ -11,8 +13,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main() async {
   const SystemUiOverlayStyle(systemNavigationBarColor: Colors.black);
   await Hive.initFlutter();
-  Hive.registerAdapter(MedicineAdapter());
-  Hive.openBox('medicines');
+  Hive
+    ..registerAdapter(MedicineAdapter())
+    ..registerAdapter(DrinkDatesAdapter());
+
+  await Hive.openBox(medicineBox);
 
   runApp(const MedicineApp());
 }
@@ -49,39 +54,42 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Follow\nMedicine",
-                        style: GoogleFonts.montserrat(
-                            fontSize: 40, fontWeight: FontWeight.w800),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(32),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Follow\nMedicine",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w800,
                       ),
-                      IconButton(
-                        onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyMedicine())),
-                        icon: const Icon(
-                          Icons.menu_rounded,
-                          size: 46,
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyMedicine(),
                         ),
                       ),
-                    ],
-                  ),
+                      iconSize: 46,
+                      icon: const Icon(
+                        Icons.person,
+                     
+                      ),
+                    ),
+                  ],
                 ),
-                const MykDateTimePicker(),
-              ],
-            ),
+              ),
+              const MykDateTimePicker(),
+            ],
           ),
         ),
       ),

@@ -5,34 +5,31 @@ import 'package:followmedicine/helper/size.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 
-class TabBarWidget extends StatefulWidget {
-  TabBarWidget({Key? key}) : super(key: key);
+class MonthBar extends StatefulWidget {
+  MonthBar({Key? key}) : super(key: key);
 
   @override
-  State<TabBarWidget> createState() => _TabBarWidgetState();
+  State<MonthBar> createState() => _MonthBarState();
 }
 
 late int selectedIndex;
-
-class _TabBarWidgetState extends State<TabBarWidget>
-    with TickerProviderStateMixin {
-  late TabController _tabController;
+late TabController tabController;
+class _MonthBarState extends State<MonthBar> with TickerProviderStateMixin {
+  
   late int weekday = DateTime(2022, DateTime.now().month).weekday;
 
-  get selectedTabBar => _tabController.index;
-
+ 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: month.length, vsync: this);
-    _tabController.index = DateTime.now().month - 1;
+    tabController = TabController(length: month.length, vsync: this);
+    tabController.index = DateTime.now().month - 1;
     weekday = DateTime(2022, DateTime.now().month).weekday;
     selectedIndex = (DateTime.now().day - 1) + weekday;
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(DateTime.now().day.toString());
     return Column(
       children: [
         TabBar(
@@ -49,13 +46,14 @@ class _TabBarWidgetState extends State<TabBarWidget>
           ),
           indicator: const BoxDecoration(),
           padding: const EdgeInsets.all(8),
-          controller: _tabController,
+          controller: tabController,
           tabs: List.generate(
             month.length,
             (index) => Tab(
               text: month[index],
             ),
           ),
+
         ),
         Container(
           width: width(context),
@@ -69,7 +67,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
               (index) => SizedBox(
                 width: width(context) * 0.12,
                 child: Text(
-                  days[index],
+                  days[index].substring(0, 3),
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(color: grey),
                 ),
@@ -81,7 +79,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
           height: width(context) * 0.9,
           width: width(context),
           child: TabBarView(
-              controller: _tabController,
+              controller: tabController,
               children: List.generate(month.length, (tabBarIndex) {
                 int currentMonthDayCount = DateTime.utc(
                   2022,
@@ -104,15 +102,15 @@ class _TabBarWidgetState extends State<TabBarWidget>
                               ? GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      debugPrint((index - weekday).toString());
                                       selectedIndex = index;
                                     });
                                   },
-                                  child: Container(
+                                  child: AnimatedContainer(
+                                    duration: Duration(milliseconds: 500),
                                     width: width(context) * 0.12,
                                     margin: const EdgeInsets.all(4),
                                     decoration: BoxDecoration(
-                                      color: index == selectedIndex
+                                      color: index == selectedIndex 
                                           ? lightGreen
                                           : lightBlue,
                                       shape: BoxShape.circle,

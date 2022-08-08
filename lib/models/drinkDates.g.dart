@@ -1,43 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'medicine.dart';
+part of 'drinkDates.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MedicineAdapter extends TypeAdapter<Medicine> {
+class DrinkDatesAdapter extends TypeAdapter<DrinkDates> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  Medicine read(BinaryReader reader) {
+  DrinkDates read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Medicine()
-      ..name = fields[0] as String
-      ..desc = fields[1] as String
-      ..count = fields[2] as int
-      ..selectedDays = (fields[3] as List).cast<dynamic>()
-      ..drinkDates = (fields[4] as List).cast<DrinkDates>();
+    return DrinkDates()
+      ..date = fields[0] as String
+      ..completedCount = fields[1] as int;
   }
 
   @override
-  void write(BinaryWriter writer, Medicine obj) {
+  void write(BinaryWriter writer, DrinkDates obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.name)
-      ..writeByte(1)
-      ..write(obj.desc)
       ..writeByte(2)
-      ..write(obj.count)
-      ..writeByte(3)
-      ..write(obj.selectedDays)
-      ..writeByte(4)
-      ..write(obj.drinkDates);
+      ..writeByte(0)
+      ..write(obj.date)
+      ..writeByte(1)
+      ..write(obj.completedCount);
   }
 
   @override
@@ -46,7 +37,7 @@ class MedicineAdapter extends TypeAdapter<Medicine> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MedicineAdapter &&
+      other is DrinkDatesAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

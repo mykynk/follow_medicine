@@ -1,4 +1,4 @@
-import 'package:followmedicine/models/drinkDates.dart';
+import './drinkDates.dart';
 import 'package:hive/hive.dart';
 part 'medicine.g.dart';
 
@@ -14,5 +14,8 @@ class Medicine extends HiveObject {
   late int count;
 
   @HiveField(3)
+  late List selectedDays;
+
+  @HiveField(4)
   late List<DrinkDates> drinkDates;
 }

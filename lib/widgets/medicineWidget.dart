@@ -8,8 +8,8 @@ class MedicineWidget extends StatefulWidget {
       {Key? key,
       required this.medicineName,
       required this.medicineDesc,
-      this.count = 0,
-      this.completedCount = 1})
+      this.count = 1,
+      this.completedCount = 0})
       : super(key: key);
   final String medicineName;
   final String medicineDesc;
@@ -22,7 +22,7 @@ class MedicineWidget extends StatefulWidget {
 class _MedicineWidgetState extends State<MedicineWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
       width: width(context) * 0.9,
       height: 65,
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -44,6 +44,8 @@ class _MedicineWidgetState extends State<MedicineWidget> {
               widget.completedCount / widget.count
             ]),
       ),
+      duration: Duration(milliseconds: 0),
+      curve: Curves.fastOutSlowIn,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

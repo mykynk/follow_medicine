@@ -1,4 +1,14 @@
-List days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+List dayss = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+List days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+
 List month = [
   "January",
   "February",
