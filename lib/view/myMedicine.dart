@@ -156,6 +156,7 @@ class _MyMedicineState extends State<MyMedicine> {
                 child: Text(
                   "All data of this medicine will be deleted.",
                   style: GoogleFonts.montserrat(),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Row(

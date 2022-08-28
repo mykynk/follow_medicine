@@ -50,7 +50,7 @@ class _AddMedicineState extends State<AddMedicine> {
           selectedDays.add(element);
         }
       });
-      drinkDates = widget.medicine!.drinkDates ;
+      drinkDates = widget.medicine!.drinkDates;
     }
     super.initState();
   }
@@ -59,17 +59,39 @@ class _AddMedicineState extends State<AddMedicine> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: darkGreen,
-        ),
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: _form(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 64.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.pageType == PageType.addMedicine
+                          ? "Add\nMedicine"
+                          : "Edit\nMedicine",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    IconButton(
+                      iconSize: 32,
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.close,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              _form(),
+            ],
+          ),
         ),
       ),
     );
